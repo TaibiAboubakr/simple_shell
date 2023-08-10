@@ -1,6 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#define _GNU_SOURCE
 #include <sys/types.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -24,5 +25,6 @@ int _puts_len(int std, char *str, int len);
 void exec_cmd(char *args[]);
 void p_err_getline(void);
 void p_err_write(void);
+void non_interactive_shell(char *argv[]);
 
 #endif /* MAIN_H */

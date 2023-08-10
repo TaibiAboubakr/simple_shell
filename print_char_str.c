@@ -1,0 +1,71 @@
+#include "main.h"
+/**
+ * print_number - write an integer number to stdout
+ * @n: The number to print
+ */
+void print_number(int n)
+{
+
+	if (n / 10 == 0)
+	{
+		__putchar(n + 48);
+		return;
+	}
+	if (n / 10 > 0)
+	{
+		print_number(n / 10);
+		__putchar((n % 10) + 48);
+	}
+}
+
+/**
+ * _slen - function that calculate lenght of string
+ * @s: pointer to string
+ * Return: lenght of string
+ */
+int _slen(char *s)
+{
+	int i = 0;
+
+	while (s[i])
+		i++;
+	return (i);
+}
+
+/**
+ * _puts - writes the character c to stdout
+ * @c: pointer to string
+ * Return: number of characters printed.
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+
+int _puts(char *c)
+{
+	return (write(1, c, _slen(c)));
+}
+/**
+ * __putchar - write the character c to stdout
+ * @c: The character to print
+ * Return: 1 : On success .
+ *        -1 : is returned, and errno is set appropriately.
+ */
+
+int __putchar(char c)
+{
+	return (write(1, &c, 1));
+}
+
+/**
+ * _puts_len - writes the character c to stdout with specific len
+ * @str: pointer to string
+ * @std: file descriptors / standard I/O streams
+ * @len: number of character to write
+ * Return: number of characters printed.
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+
+int _puts_len(int std, char *str, int len)
+{
+	return (write(std, str, len));
+}
+

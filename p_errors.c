@@ -4,14 +4,17 @@
  */
 void p_err_getline(void)
 {
+if (errno == 0)
+{
+return;
+}
 write(1, "\n", 1);
 if (errno != 0 && errno != EOF)
 {
-perror("getline");
 exit(EXIT_FAILURE);
 }
-exit(0);
 }
+
 /**
  * p_err_write - function that print error when write sys call failed
  */
@@ -21,3 +24,4 @@ perror("write");
 exit(EXIT_FAILURE);
 
 }
+

@@ -1,13 +1,14 @@
 #include "main.h"
 /**
  * p_err_getline - function that print error when getline function failed
+ * Return: status
  */
 int p_err_getline(void)
 {
 
 if (errno == 0)
 {
-exit (0);
+exit(0);
 }
 if (errno != 0 && errno == EOF)
 {

@@ -2,6 +2,7 @@
 /**
  * exec_cmd - Execute a command with arguments
  * @args: An array of strings representing the command and its arguments
+ * @cmd: pointer to strings representing the command name
  */
 void exec_cmd(char *cmd, char *args[])
 {

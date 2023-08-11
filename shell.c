@@ -1,4 +1,9 @@
 #include "main.h"
+/**
+ * non_interactive_shell -function that execute command in non-interactive mode
+ * @argv: An array of pointers that contains the command-line arguments
+ *	  provided to shell
+ */
 void non_interactive_shell(char *argv[])
 {
 char *line = NULL, *flags = NULL, *args[64] = {NULL}, *cmd, *cmd1;
@@ -36,13 +41,9 @@ if (!check_file_perm(argv[0], cmd, "Permission denied", 1))
 {free(line);
 exit(126); }
 exec_cmd(cmd, args);
-if (line)
-free(line);
-if (cmd1)
-free(cmd1);
+_free(line, cmd1);
 exit(0);
 }
-
 
 
 /**
@@ -54,7 +55,7 @@ exit(0);
 
 int main(int argc __attribute__((unused)), char *argv[])
 {
-char *line = NULL, *flags = NULL, *args[64] = {NULL}, *cmd = NULL, *cmd1 = NULL;
+char *line = NULL, *flags = NULL, *args[64] = {NULL}, *cmd, *cmd1 = NULL;
 size_t len = 0;
 ssize_t read = 0, w;
 int i, count = 0;
@@ -70,8 +71,7 @@ count++;
 read = getline(&line, &len, stdin);
 if (read == -1)
 {
-if (line)
-free(line);
+_free(line, NULL);
 p_err_getline(); }
 if (read > 0 && line[read - 1] == '\n')
 line[read - 1] = '\0';
@@ -94,15 +94,7 @@ if (!check_file_exist(argv[0], cmd, "not found", count))
 if (!check_file_perm(argv[0], cmd, "Permission denied", count))
 {continue; }
 exec_cmd(cmd, args);
-if (line)
-free(line);
-line = NULL;
-if (cmd1)
-free(cmd1);
-cmd1 = NULL; }
-if (line)
-free(line);
-if (cmd1)
-free(cmd1);
+_free(line, cmd1); }
+_free(line, cmd1);
 return (0);
 }

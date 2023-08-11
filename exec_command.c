@@ -3,7 +3,7 @@
  * exec_cmd - Execute a command with arguments
  * @args: An array of strings representing the command and its arguments
  */
-void exec_cmd(char *args[])
+void exec_cmd(char *cmd, char *args[])
 {
 	int status;
 	pid_t child_pid, term_ch_pid;
@@ -17,7 +17,7 @@ void exec_cmd(char *args[])
 	}
 	if (child_pid == 0)
 	{
-		if (execve(args[0], args, environ) == -1)
+		if (execve(cmd, args, environ) == -1)
 			perror("execve");
 	}
 	else

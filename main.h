@@ -22,9 +22,11 @@ int __putchar(char c);
 int check_file_exist(char *shellname, char *filename, char *er_msg, int count);
 int check_file_perm(char *shellname, char *filename, char *err_msg, int count);
 int _puts_len(int std, char *str, int len);
-void exec_cmd(char *args[]);
-void p_err_getline(void);
+void exec_cmd(char *cmd, char *args[]);
+int p_err_getline(void);
 void p_err_write(void);
 void non_interactive_shell(char *argv[]);
+char *check_command_path(char *cmd);
+void _free(char *, char *);
 
 #endif /* MAIN_H */

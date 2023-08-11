@@ -2,17 +2,23 @@
 /**
  * p_err_getline - function that print error when getline function failed
  */
-void p_err_getline(void)
+int p_err_getline(void)
 {
+
 if (errno == 0)
 {
-return;
+exit (0);
+}
+if (errno != 0 && errno == EOF)
+{
+exit(0);
 }
 write(1, "\n", 1);
 if (errno != 0 && errno != EOF)
 {
-exit(EXIT_FAILURE);
+exit(1);
 }
+exit(0);
 }
 
 /**

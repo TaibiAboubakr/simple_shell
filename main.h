@@ -28,5 +28,6 @@ void p_err_write(void);
 void non_interactive_shell(char *argv[]);
 char *check_command_path(char *cmd);
 void _free(char *, char *);
+void _free_with_null(char **, char **);
 
 #endif /* MAIN_H */

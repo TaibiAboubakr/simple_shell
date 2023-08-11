@@ -71,7 +71,8 @@ count++;
 read = getline(&line, &len, stdin);
 if (read == -1)
 {
-_free(line, NULL);
+if (line)
+free(line);
 p_err_getline(); }
 if (read > 0 && line[read - 1] == '\n')
 line[read - 1] = '\0';
@@ -94,7 +95,7 @@ if (!check_file_exist(argv[0], cmd, "not found", count))
 if (!check_file_perm(argv[0], cmd, "Permission denied", count))
 {continue; }
 exec_cmd(cmd, args);
-_free(line, cmd1); }
+_free_with_null(&line, &cmd1); }
 _free(line, cmd1);
 return (0);
 }

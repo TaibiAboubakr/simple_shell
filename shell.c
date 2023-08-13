@@ -24,7 +24,7 @@ exit(EXIT_FAILURE);
 if (!args[0])
 { free(args);
 continue; }
-if ((strcmp(args[0], "exit")) == 0)
+if ((_strcmp(args[0], "exit")) == 0)
 { free(args);
 free(line);
 exit(child_exit_code); }
@@ -79,7 +79,7 @@ exit(EXIT_FAILURE);
 if (!args[0])
 { free(args);
 continue; }
-if ((strcmp(args[0], "exit")) == 0)
+if ((_strcmp(args[0], "exit")) == 0)
 { free(args);
 break; }
 cmd1 = check_command_path(args[0]);

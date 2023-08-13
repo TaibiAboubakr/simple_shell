@@ -32,6 +32,7 @@ void _free(char *, char *);
 void _free_with_null(char **, char **);
 char **strtok_alloc(char *line, ssize_t read);
 int _puts_std(int std, char *c);
+void _env(void);
 
 #endif /* MAIN_H */
 

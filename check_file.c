@@ -13,7 +13,7 @@ int check_file_exist(char *shellname, char *filename, char *err_msg, int count)
 	int len;
 	struct stat f_stat;
 
-	if ((stat(filename, &f_stat) == 0))
+	if ((stat(filename, &f_stat) == 0) && (filename[0] == '.' || filename[0] == '/'))
 		return (1);
 
 	len = _slen(shellname);

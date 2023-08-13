@@ -15,10 +15,11 @@
 #include <errno.h>
 extern char **environ;
 
-void print_number(int n);
+void print_number(int std, int n);
 int _slen(char *s);
 int _puts(char *c);
 int __putchar(char c);
+int _putchar_err(int std, char c);
 int check_file_exist(char *shellname, char *filename, char *er_msg, int count);
 int check_file_perm(char *shellname, char *filename, char *err_msg, int count);
 int _puts_len(int std, char *str, int len);

@@ -17,7 +17,7 @@ int check_file_exist(char *shellname, char *filename, char *err_msg, int count)
 		return (1);
 
 	len = _slen(shellname);
-	
+
 	_puts_len(2, shellname, len);
 	write(2, ": ", 2);
 	print_number(2, count);

@@ -15,10 +15,8 @@ char *check_command_path(char *cmd)
 		return (NULL);
 	path = getenv("PATH");
 	if (path == NULL)
-	{   write(2, "PATH not exist", 14);
-		exit(1);
-	}
-	if (path[0] =='\0')
+		return (NULL);
+	if (path[0] == '\0')
 		return (NULL);
 	path_dup = strdup(path);
 	cmd_len = strlen(cmd);

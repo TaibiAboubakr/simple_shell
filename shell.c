@@ -12,8 +12,7 @@ ssize_t r = 0;
 int exit_code, count = 0, child_exit_code;
 
 while ((r = getline(&line, &len, stdin)) != -1)
-{
-exit_code = 0;
+{ exit_code = 0;
 count++;
 args = strtok_alloc(line, r);
 if (args == NULL)
@@ -23,6 +22,11 @@ exit(EXIT_FAILURE);
 }
 if (!args[0])
 { free(args);
+continue; }
+if ((_strcmp(args[0], "env")) == 0)
+{ _env();
+free(args);
+exit_code = 0;
 continue; }
 if ((_strcmp(args[0], "exit")) == 0)
 { free(args);
@@ -45,8 +49,7 @@ child_exit_code = exec_cmd(cmd, args);
 _free(NULL, cmd1);
 free(args); }
 free(line);
-exit(exit_code);
-}
+exit(exit_code); }
 
 
 /**

@@ -34,5 +34,6 @@ char **strtok_alloc(char *line, ssize_t read);
 int _puts_std(int std, char *c);
 void _env(void);
 int _strcmp(char *s1, char *s2);
+int _strncmp(char *s1, char *s2, int n);
 
 #endif /* MAIN_H */

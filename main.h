@@ -35,4 +35,3 @@ int _puts_std(int std, char *c);
 void _env(void);
 
 #endif /* MAIN_H */
-

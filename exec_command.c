@@ -3,10 +3,11 @@
  * exec_cmd - Execute a command with arguments
  * @args: An array of strings representing the command and its arguments
  * @cmd: pointer to strings representing the command name
+ * Return: exit status
  */
-void exec_cmd(char *cmd, char *args[])
+int exec_cmd(char *cmd, char *args[])
 {
-	int status;
+	int status, child_exit_code;
 	pid_t child_pid, term_ch_pid;
 
 	child_pid = fork();
@@ -29,6 +30,10 @@ void exec_cmd(char *cmd, char *args[])
 			perror("waitpid");
 			exit(EXIT_FAILURE);
 		}
-	}
-}
+		if (WIFEXITED(status))
+		{child_exit_code = WEXITSTATUS(status);
+			return (child_exit_code); }
 
+	}
+	return (0);
+}

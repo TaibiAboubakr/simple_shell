@@ -18,6 +18,8 @@ char *check_command_path(char *cmd)
 	{   write(2, "PATH not exist", 14);
 		exit(1);
 	}
+	if (path[0] =='\0')
+		return (NULL);
 	path_dup = strdup(path);
 	cmd_len = strlen(cmd);
 	token = strtok(path_dup, ":");

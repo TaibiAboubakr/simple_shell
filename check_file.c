@@ -16,11 +16,11 @@ int check_file_exist(char *shellname, char *filename, char *err_msg, int count)
 	if ((stat(filename, &f_stat) == 0))
 		return (1);
 
-	len = _slen(shellname) - 2;
-	shellname = shellname + 2;
+	len = _slen(shellname);
+	
 	_puts_len(2, shellname, len);
 	write(2, ": ", 2);
-	print_number(count);
+	print_number(2, count);
 	write(2, ": ", 2);
 	_puts_len(2, filename, _slen(filename));
 	write(2, ": ", 2);
@@ -51,7 +51,7 @@ int check_file_perm(char *shellname, char *filename, char *err_msg, int count)
 	shellname = shellname + 2;
 	_puts_len(2, shellname, len);
 	write(2, ": ", 2);
-	print_number(count);
+	print_number(2, count);
 	write(2, ": ", 2);
 	_puts_len(2, filename, _slen(filename));
 	write(2, ": ", 2);
@@ -60,3 +60,15 @@ int check_file_perm(char *shellname, char *filename, char *err_msg, int count)
 	return (0);
 }
 
+/**
+ * _putchar_err - write the character c to stdout
+ * @c: The character to print
+ * @std:  file descriptors / standard I/O streams
+ * Return: 1 : On success .
+ *        -1 : is returned, and errno is set appropriately.
+ */
+
+int _putchar_err(int std, char c)
+{
+	return (write(std, &c, 1));
+}

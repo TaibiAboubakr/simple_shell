@@ -3,18 +3,18 @@
  * print_number - write an integer number to stdout
  * @n: The number to print
  */
-void print_number(int n)
+void print_number(int std, int n)
 {
 
 	if (n / 10 == 0)
 	{
-		__putchar(n + 48);
+		_putchar_err(std, n + 48);
 		return;
 	}
 	if (n / 10 > 0)
 	{
-		print_number(n / 10);
-		__putchar((n % 10) + 48);
+		print_number(std, n / 10);
+		_putchar_err(std, (n % 10) + 48);
 	}
 }
 

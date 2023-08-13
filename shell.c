@@ -8,17 +8,22 @@ void non_interactive_shell(char *argv[])
 {
 char *line = NULL, **args, *cmd, *cmd1;
 size_t len = 0;
-ssize_t read = 0;
+ssize_t r = 0;
+int exit_code, count = 0;
 
-read = getline(&line, &len, stdin);
-args = strtok_alloc(line, read);
+while ((r = getline(&line, &len, stdin)) != -1)
+{
+exit_code = 0;
+count++;
+args = strtok_alloc(line, r);
 if (args == NULL)
 { _puts_std(2, "Memory allocation failed\n");
+free(line);
 exit(EXIT_FAILURE);
 }
 if (!args[0])
 { free(args);
-exit(0); }
+continue; }
 if ((strcmp(args[0], "exit")) == 0)
 { free(args);
 free(line);
@@ -28,18 +33,19 @@ if (!cmd1)
 cmd = args[0];
 if (cmd1)
 cmd = cmd1;
-if (!check_file_exist(argv[0], cmd, "not found", 1))
+if (!check_file_exist(argv[0], cmd, "not found", count))
 { free(args);
-free(line);
-exit(127); }
-if (!check_file_perm(argv[0], cmd, "Permission denied", 1))
-{ free(args);
-free(line);
-exit(126); }
+exit_code = 127;
+continue; }
+if (!check_file_perm(argv[0], cmd, "Permission denied", count))
+{free(args);
+exit_code = 126;
+continue; }
 exec_cmd(cmd, args);
-_free(line, cmd1);
-free(args);
-exit(0);
+_free(NULL, cmd1);
+free(args); }
+free(line);
+exit(exit_code);
 }
 
 

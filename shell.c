@@ -9,7 +9,7 @@ void non_interactive_shell(char *argv[])
 char *line = NULL, **args, *cmd, *cmd1;
 size_t len = 0;
 ssize_t r = 0;
-int exit_code, count = 0;
+int exit_code, count = 0, child_exit_code;
 
 while ((r = getline(&line, &len, stdin)) != -1)
 {
@@ -27,7 +27,7 @@ continue; }
 if ((strcmp(args[0], "exit")) == 0)
 { free(args);
 free(line);
-exit(0); }
+exit(child_exit_code); }
 cmd1 = check_command_path(args[0]);
 if (!cmd1)
 cmd = args[0];
@@ -41,7 +41,7 @@ if (!check_file_perm(argv[0], cmd, "Permission denied", count))
 {free(args);
 exit_code = 126;
 continue; }
-exec_cmd(cmd, args);
+child_exit_code = exec_cmd(cmd, args);
 _free(NULL, cmd1);
 free(args); }
 free(line);

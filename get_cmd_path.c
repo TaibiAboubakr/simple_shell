@@ -13,7 +13,7 @@ char *check_command_path(char *cmd)
 
 	if (cmd[0] == '/' || cmd[1] == '/')
 		return (NULL);
-	path = getenv("PATH");
+	path = _getenv("PATH");
 	if (path == NULL)
 		return (NULL);
 	if (path[0] == '\0')

@@ -34,10 +34,11 @@ free(line);
 exit(child_exit_code); }*/
 c_exit = check_if_exit(args, argv[0], count, child_exit_code);
 if (c_exit == -2)
-{ c_exit = 2;
-continue; }
+{ free(line);
+exit (2); }
 if (c_exit >= 0)
-exit(c_exit);
+{free(line);
+exit(c_exit);}
 cmd1 = check_command_path(args[0]);
 if (!cmd1)
 cmd = args[0];

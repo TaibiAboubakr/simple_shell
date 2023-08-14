@@ -5,13 +5,14 @@
  * @args: An array of strings containing command-line arguments
  * @shellname: The name of the shell program
  * @count: The current command count
+ * @child_exit_code: The exit status of a child process
  * Return:  0, if no additional argument is provided
  * -2, displaying an error message if a non-valid integer argument is provided
  * The integer exit status, if a valid integer argument is provided
  * 0,if the given command is not "exit"
  */
 
-int check_if_exit(char **args, char *shellname, int count)
+int check_if_exit(char **args, char *shellname, int count, int child_exit_code)
 {
 	int r_atoi = 0;
 
@@ -19,7 +20,7 @@ int check_if_exit(char **args, char *shellname, int count)
 	{
 		if (!args[1])
 		{ free(args);
-		return (0); }
+		return (child_exit_code); }
 		r_atoi = _atoi(args[1]);
 		if (r_atoi == -1)
 		{

@@ -7,7 +7,7 @@
  */
 int exec_cmd(char *cmd, char *args[])
 {
-	int status, child_exit_code;
+	int status = 0, child_exit_code;
 	pid_t child_pid, term_ch_pid;
 
 	child_pid = fork();

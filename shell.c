@@ -9,7 +9,7 @@ void non_interactive_shell(char *argv[])
 char *line = NULL, **args, *cmd, *cmd1;
 size_t len = 0;
 ssize_t r = 0;
-int exit_code, count = 0, child_exit_code;
+int exit_code = 0, count = 0, child_exit_code = 0;
 
 while ((r = getline(&line, &len, stdin)) != -1)
 { exit_code = 0;

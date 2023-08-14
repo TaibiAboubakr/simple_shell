@@ -17,6 +17,9 @@ int check_if_exit(char **args, char *shellname, int count)
 
 	if (_strcmp(args[0], "exit") == 0)
 	{
+		if (!args[1])
+		{ free(args);
+		return (0); }
 		r_atoi = _atoi(args[1]);
 		if (r_atoi == -1)
 		{

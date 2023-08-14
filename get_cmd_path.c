@@ -18,17 +18,17 @@ char *check_command_path(char *cmd)
 		return (NULL);
 	if (path[0] == '\0')
 		return (NULL);
-	path_dup = strdup(path);
-	cmd_len = strlen(cmd);
+	path_dup = _strdup(path);
+	cmd_len = _slen(cmd);
 	token = strtok(path_dup, ":");
 	while (token)
 	{
-		dir_len = strlen(token);
+		dir_len = _slen(token);
 		file_path = malloc(cmd_len + dir_len + 2);
-		strcpy(file_path, token);
-		strcat(file_path, "/");
-		strcat(file_path, cmd);
-		strcat(file_path, "\0");
+		_strcpy(file_path, token);
+		_strcat(file_path, "/");
+		_strcat(file_path, cmd);
+		_strcat(file_path, "\0");
 		if ((stat(file_path, &f_stat) == 0))
 		{
 			free(path_dup);

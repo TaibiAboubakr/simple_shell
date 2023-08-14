@@ -36,5 +36,6 @@ void _env(void);
 int _strcmp(char *s1, char *s2);
 int _strncmp(char *s1, char *s2, int n);
 char *_getenv(char *var);
+int check_if_exit(char **args, char *shellname, int count);
 
 #endif /* MAIN_H */

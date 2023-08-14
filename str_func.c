@@ -47,6 +47,8 @@ int _atoi(char *s)
 {
 	int i = 0, n = 0;
 
+	if (s == NULL)
+		return (0);
 	for (i = 0; s[i]; i++)
 	{
 		if (s[i] >= '0' && s[i] <= '9')
@@ -107,4 +109,5 @@ char *_strcat(char *dest, char *src)
 	*dest = '\0';
 	return (p_dest);
 }
+
 

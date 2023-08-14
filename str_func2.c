@@ -7,10 +7,10 @@
  * @str: pointer to a string
  * Return: a pointer to duplicated string., or NULL if it fails
  */
-char *_strdup(char *str)
+char *_strdup(const char *str)
 {
 int i = 0;
-char *pdupstr;
+char *pdupstr = NULL;
 if (str == NULL)
 return (NULL);
 
@@ -23,5 +23,6 @@ return (NULL);
 
 for (i = 0; str[i]; i++)
 pdupstr[i] = str[i];
+pdupstr[i] = '\0';
 return (pdupstr);
 }

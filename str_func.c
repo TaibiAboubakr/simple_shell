@@ -69,7 +69,9 @@ int _atoi(char *s)
  */
 char *_strcpy(char *dest, char *src)
 {
-	char *p_dest = dest;
+	char *p_dest = NULL;
+	
+	p_dest = dest;
 
 	while (*src != '\0')
 	{

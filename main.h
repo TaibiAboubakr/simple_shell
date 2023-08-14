@@ -40,7 +40,7 @@ int check_if_exit(char **args, char *shellname, int count, int exit_code);
 int _atoi(char *s);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
-char *_strdup(char *str);
+char *_strdup(const char *str);
 
 #endif /* MAIN_H */
 

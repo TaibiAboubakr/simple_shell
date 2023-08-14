@@ -7,8 +7,8 @@
  */
 char *check_command_path(char *cmd)
 {
-	char *path, *path_dup, *token, *file_path = NULL;
-	size_t cmd_len, dir_len;
+	char *path = NULL, *path_dup = NULL, *token, *file_path = NULL;
+	size_t cmd_len = 0, dir_len = 0;
 	struct stat f_stat;
 
 	if (cmd[0] == '/' || cmd[1] == '/')

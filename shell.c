@@ -9,7 +9,7 @@ void non_interactive_shell(char *argv[])
 char *line = NULL, **args, *cmd, *cmd1;
 size_t len = 0;
 ssize_t r = 0;
-int exit_code = 0, count = 0, child_exit_code = 0;
+int exit_code = 0, count = 0, child_exit_code = 0, c_exit = 0;
 
 while ((r = getline(&line, &len, stdin)) != -1)
 { exit_code = 0;
@@ -28,10 +28,16 @@ if ((_strcmp(args[0], "env")) == 0)
 free(args);
 exit_code = 0;
 continue; }
-if ((_strcmp(args[0], "exit")) == 0)
+/*if ((_strcmp(args[0], "exit")) == 0)
 { free(args);
 free(line);
-exit(child_exit_code); }
+exit(child_exit_code); }*/
+c_exit = check_if_exit(args, argv[0], count, child_exit_code);
+if (c_exit == -2)
+{ c_exit = 2;
+continue; }
+if (c_exit >= 0)
+exit(c_exit);
 cmd1 = check_command_path(args[0]);
 if (!cmd1)
 cmd = args[0];
@@ -82,11 +88,11 @@ exit(EXIT_FAILURE);
 if (!args[0])
 { free(args);
 continue; }
-c_exit = check_if_exit(args, argv[0], count);
+c_exit = check_if_exit(args, argv[0], count, 0);
 if (c_exit == -2)
 { c_exit = 2;
 continue; }
-if (c_exit >=0)
+if (c_exit >= 0)
 break;
 if ((_strcmp(args[0], "env")) == 0)
 { _env();
@@ -109,3 +115,4 @@ free(args); }
 _free(line, cmd1);
 return (c_exit);
 }
+

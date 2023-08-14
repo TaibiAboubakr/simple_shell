@@ -28,12 +28,30 @@ int _strcmp(char *s1, char *s2)
  */
 int _strncmp(char *s1, char *s2, int n)
 {
-int i;
+	int i;
 
-for (i = 0; s1[i] && s2[i] && n > i; i++)
+	for (i = 0; s1[i] && s2[i] && n > i; i++)
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+	}
+	return (0);
+}
+
+/**
+ * *_atoi - convert a string to an integer
+ * @s: pointer to a string
+ * Return: an integer
+ */
+int _atoi(char *s)
 {
-if (s1[i] != s2[i])
-return (s1[i] - s2[i]);
-}
-return (0);
-}
+	int i = 0, n = 0;
+
+	for (i = 0; s[i]; i++)
+	{
+		if (s[i] >= '0' && s[i] <= '9')
+			n = n * 10 + (s[i] - '0');
+		else
+			return (-1);
+	}
+	return (n);

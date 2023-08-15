@@ -106,12 +106,14 @@ if (!cmd1)
 cmd = args[0];
 if (cmd1)
 cmd = cmd1;
-if (!check_file_exist(argv[0], cmd, "not found", count))
+if (check_file(argv[0], cmd, args, count))
+continue;
+/* if (!check_file_exist(argv[0], cmd, "not found", count))
 { free(args);
 continue; }
 if (!check_file_perm(argv[0], cmd, "Permission denied", count))
 { free(args);
-continue; }
+continue; } */
 exec_cmd(cmd, args);
 _free_with_null(&line, &cmd1);
 free(args); }

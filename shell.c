@@ -44,14 +44,16 @@ if (!cmd1)
 cmd = args[0];
 if (cmd1)
 cmd = cmd1;
-if (!check_file_exist(argv[0], cmd, "not found", count))
+if (exit_code = check_file(argv[0], cmd, args, count))
+continue;
+/* if (!check_file_exist(argv[0], cmd, "not found", count))
 { free(args);
 exit_code = 127;
 continue; }
 if (!check_file_perm(argv[0], cmd, "Permission denied", count))
 {free(args);
 exit_code = 126;
-continue; }
+continue; }*/
 child_exit_code = exec_cmd(cmd, args);
 _free(NULL, cmd1);
 free(args); }

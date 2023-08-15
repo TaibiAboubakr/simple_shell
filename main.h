@@ -41,6 +41,8 @@ int _atoi(char *s);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 char *_strdup(const char *str);
+void print_err_file(char *shellname, char *filename, char *err_msg, int count);
+int check_file(char *shellname, char *filename, char **args, int count);
 
 #endif /* MAIN_H */
 

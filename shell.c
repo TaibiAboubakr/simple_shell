@@ -44,7 +44,7 @@ if (!cmd1)
 cmd = args[0];
 if (cmd1)
 cmd = cmd1;
-if (exit_code = check_file(argv[0], cmd, args, count))
+if ((exit_code = check_file(argv[0], cmd, args, count)))
 continue;
 /* if (!check_file_exist(argv[0], cmd, "not found", count))
 { free(args);

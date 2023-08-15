@@ -35,10 +35,10 @@ exit(child_exit_code); }*/
 c_exit = check_if_exit(args, argv[0], count, child_exit_code);
 if (c_exit == -2)
 { free(line);
-exit (2); }
+exit(2); }
 if (c_exit >= 0)
 {free(line);
-exit(c_exit);}
+exit(c_exit); }
 cmd1 = check_command_path(args[0]);
 if (!cmd1)
 cmd = args[0];

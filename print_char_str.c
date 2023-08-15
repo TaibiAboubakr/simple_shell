@@ -1,6 +1,7 @@
 #include "main.h"
 /**
  * print_number - write an integer number to stdout
+ * @std: File descriptor to which the number is printed
  * @n: The number to print
  */
 void print_number(int std, int n)
@@ -68,4 +69,5 @@ int _puts_len(int std, char *str, int len)
 {
 	return (write(std, str, len));
 }
+
 

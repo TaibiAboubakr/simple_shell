@@ -42,4 +42,31 @@ int check_if_exit(char **args, char *shellname, int count, int child_exit_code)
 	}
 	return (-1);
 }
+/**
+ * check_is_env - Checks if the command entered is "setenv" or "unsetenv"
+ * and calls the appropriate function.
+ * @args: An array of strings containing command-line arguments.
+ * Return: 2 if "setenv", 1 if "unsetenv", -1 on error.
+ */
+int check_is_env(char **args)
+{
+static int count;
 
+if ((_strcmp(args[0], "setenv")) == 0)
+{
+if (!args[1] || !args[2])
+return (-1);
+_setenv(args[1], args[2], count);
+count = 1;
+return (2);
+}
+
+if ((_strcmp(args[0], "unsetenv")) == 0)
+{
+if (!args[1])
+return (-1);
+_unsetenv(args[1], count);
+return (1);
+}
+return (0);
+}

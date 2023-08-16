@@ -9,7 +9,7 @@ void non_interactive_shell(char *argv[])
 char *line = NULL, **args, *cmd, *cmd1;
 size_t len = 0;
 ssize_t r = 0;
-int exit_code = 0, count = 0, child_exit_code = 0, c_exit = 0;
+int exit_code = 0, count = 0, child_exit_code = 0, c_exit = 0, env = 0, f = 0;
 
 while ((r = getline(&line, &len, stdin)) != -1)
 { exit_code = 0;
@@ -18,11 +18,15 @@ args = strtok_alloc(line, r);
 if (args == NULL)
 { _puts_std(2, "Memory allocation failed\n");
 free(line);
-exit(EXIT_FAILURE);
-}
+exit(EXIT_FAILURE);}
 if (!args[0])
 { free(args);
 continue; }
+if ((env = check_is_env(args)))
+{ if(env == 2)
+f = 2;
+free(args);
+continue;}
 if ((_strcmp(args[0], "env")) == 0)
 { _env();
 free(args);
@@ -40,10 +44,11 @@ if (c_exit >= 0)
 {free(line);
 exit(c_exit); }
 cmd1 = check_command_path(args[0]);
-if (!cmd1)
+/* if (!cmd1)
 cmd = args[0];
 if (cmd1)
-cmd = cmd1;
+cmd = cmd1; */
+cmd = !cmd1 ? args[0] : cmd1;
 if ((exit_code = check_file(argv[0], cmd, args, count)))
 continue;
 /* if (!check_file_exist(argv[0], cmd, "not found", count))
@@ -58,6 +63,8 @@ child_exit_code = exec_cmd(cmd, args);
 _free(NULL, cmd1);
 free(args); }
 free(line);
+if (f == 2)
+free_env(environ);
 exit(exit_code); }
 
 
@@ -73,7 +80,7 @@ int main(int argc __attribute__((unused)), char *argv[])
 char *line = NULL, **args, *cmd, *cmd1 = NULL;
 size_t len = 0;
 ssize_t read = 0, w;
-int count = 0, c_exit = 0;
+int count = 0, c_exit = 0, env = 0, f = 0;
 
 if (!isatty(STDIN_FILENO))
 non_interactive_shell(argv);
@@ -86,8 +93,7 @@ read = getline(&line, &len, stdin);
 args = strtok_alloc(line, read);
 if (args == NULL)
 { _puts_std(2, "Memory allocation failed\n");
-exit(EXIT_FAILURE);
-}
+exit(EXIT_FAILURE); }
 if (!args[0])
 { free(args);
 continue; }
@@ -97,15 +103,21 @@ if (c_exit == -2)
 continue; }
 if (c_exit >= 0)
 break;
+if ((env = check_is_env(args)))
+{ if(env == 2)
+f = 2;
+free(args);
+continue;}
 if ((_strcmp(args[0], "env")) == 0)
 { _env();
 free(args);
 continue; }
 cmd1 = check_command_path(args[0]);
-if (!cmd1)
+/* if (!cmd1)
 cmd = args[0];
 if (cmd1)
-cmd = cmd1;
+cmd = cmd1; */
+cmd = !cmd1 ? args[0] : cmd1;
 if (check_file(argv[0], cmd, args, count))
 continue;
 /* if (!check_file_exist(argv[0], cmd, "not found", count))
@@ -118,6 +130,8 @@ exec_cmd(cmd, args);
 _free_with_null(&line, &cmd1);
 free(args); }
 _free(line, cmd1);
+if (f == 2)
+free(environ);
 return (c_exit);
 }
 

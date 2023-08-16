@@ -43,6 +43,8 @@ char *_strcat(char *dest, char *src);
 char *_strdup(const char *str);
 void print_err_file(char *shellname, char *filename, char *err_msg, int count);
 int check_file(char *shellname, char *filename, char **args, int count);
+int check_is_env(char **args);
+int _setenv(char *name, const char *value, int count);
+int _unsetenv(char *name, int count);
 
 #endif /* MAIN_H */
-

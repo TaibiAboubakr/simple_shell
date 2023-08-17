@@ -43,8 +43,12 @@ char *_strcat(char *dest, char *src);
 char *_strdup(const char *str);
 void print_err_file(char *shellname, char *filename, char *err_msg, int count);
 int check_file(char *shellname, char *filename, char **args, int count);
-int check_is_env(char **args);
+int check_is_env_cd(char **args, char *shellname, int count);
 int _setenv(char *name, const char *value, int count);
 int _unsetenv(char *name, int count);
+int _cd(char *dest_dir,char *shellname, int count, int check);
+void print_err_cd(char *shellname, char *dir_name, int count);
+
+
 
 #endif /* MAIN_H */

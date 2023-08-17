@@ -22,7 +22,7 @@ exit(EXIT_FAILURE);}
 if (!args[0])
 { free(args);
 continue; }
-if ((env = check_is_env(args)))
+if ((env = check_is_env_cd(args, argv[0], count)))
 { if(env == 2)
 f = 2;
 free(args);
@@ -103,7 +103,7 @@ if (c_exit == -2)
 continue; }
 if (c_exit >= 0)
 break;
-if ((env = check_is_env(args)))
+if ((env = check_is_env_cd(args, argv[0], count)))
 { if(env == 2)
 f = 2;
 free(args);
@@ -131,7 +131,7 @@ _free_with_null(&line, &cmd1);
 free(args); }
 _free(line, cmd1);
 if (f == 2)
-free(environ);
+free_env(environ);
 return (c_exit);
 }
 

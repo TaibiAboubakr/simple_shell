@@ -107,9 +107,7 @@ if (strcmp(dest_dir, "-") == 0)
 {old = 1;
 dest_dir = _getenv("OLDPWD");
 if (!dest_dir)
-{_puts_std(1, current_dir);
-__putchar('\n');
-free(current_dir);
+{print_err_oldpwd(current_dir);
 return (-1); }
 }
 if (!(stat(dest_dir, &dirStat) == 0 && S_ISDIR(dirStat.st_mode)))
@@ -158,6 +156,16 @@ _puts_len(2, dir_name, _slen(dir_name));
 write(2, "\n", 1);
 }
 
-
+/**
+ * print_err_oldpwd - Print an error message related to 'cd -' command
+ * and the old path not set
+ * @current_dir: name of directory associated with the error
+ */
+void print_err_oldpwd(char *current_dir)
+{
+_puts_std(1, current_dir);
+__putchar('\n');
+free(current_dir);
+}
 
 

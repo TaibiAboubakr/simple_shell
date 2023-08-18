@@ -48,6 +48,7 @@ int _setenv(char *name, const char *value, int count);
 int _unsetenv(char *name, int count);
 int _cd(char *dest_dir,char *shellname, int count, int check);
 void print_err_cd(char *shellname, char *dir_name, int count);
+void print_err_oldpwd(char *current_dir);
 
 
 

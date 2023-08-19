@@ -48,12 +48,13 @@ int check_if_exit(char **args, char *shellname, int count, int child_exit_code)
  * @args: An array of strings containing command-line arguments.
  * @shellname: The name of the shell program
  * @count: The current command count
+ * @ex_code: exit code of the last executed command
  * Return: 2 if "setenv", 1 if "unsetenv", -1 on error.
  */
-int check_is_env_cd(char **args, char *shellname, int count)
+int check_is_env_cd(char **args, char *shellname, int count, int ex_code)
 {
 static int check;
-int ret_cd = 0;
+int ret_cd = 0, i;
 if ((_strcmp(args[0], "setenv")) == 0)
 {
 if (!args[1] || !args[2])
@@ -61,30 +62,32 @@ return (-1);
 _setenv(args[1], args[2], check);
 free(args);
 check = 1;
-return (2);
-}
+return (2); }
 if ((_strcmp(args[0], "unsetenv")) == 0)
 {
 if (!args[1])
 return (-1);
 _unsetenv(args[1], check);
 free(args);
-return (1);
-}
+return (1); }
 if ((_strcmp(args[0], "cd")) == 0)
-{
-ret_cd = _cd(args[1], shellname, count, check);
+{ ret_cd = _cd(args[1], shellname, count, check);
 free(args);
 if (ret_cd == -2)
 {check = 1;
-return (2);
-}
-return (1);
-}
+return (2); }
+return (1); }
 if ((_strcmp(args[0], "env")) == 0)
 { _env();
 free(args);
 return (1); }
+if ((_strcmp(args[0], "echo")) == 0 || args[0][0] == '$')
+{_echo(args, ex_code);
+free(args);
+return (1); }
+for (i = 0; args[i]; i++)
+if (args[i][0] == '$')
+_echo_get_var(args, i);
 return (0);
 }
 

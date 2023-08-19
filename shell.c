@@ -22,7 +22,7 @@ exit(EXIT_FAILURE);} */
 if (!args[0])
 { free(args);
 continue; }
-if ((env = check_is_env_cd(args, argv[0], count)))
+if ((env = check_is_env_cd(args, argv[0], count, child_exit_code)))
 { if(env == 2)
 f = 2;
 exit_code = 0;
@@ -110,7 +110,7 @@ continue; }
 if (c_exit >= 0)
 break;
 
-if ((env = check_is_env_cd(args, argv[0], count)))
+if ((env = check_is_env_cd(args, argv[0], count, c_exit)))
 { if(env == 2)
 f = 2;
 /* free(args); */

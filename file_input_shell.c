@@ -32,7 +32,7 @@ args = strtok_alloc(buffer1, r);
 if (!args[0])
 { free(args);
 continue; }
-if ((check_is_env_cd(args, argv[0], count)))
+if ((check_is_env_cd(args, argv[0], count, ex_cod)))
 continue;
 c_exit = check_if_exit(args, argv[0], count, c_e_c);
 if (c_exit >= 0 || c_exit == -2)

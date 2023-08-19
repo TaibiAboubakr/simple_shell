@@ -46,13 +46,14 @@ int check_file(char *shellname, char *filename, char **args, int count);
 int check_is_env_cd(char **args, char *shellname, int count, int ex_code);
 int _setenv(char *name, const char *value, int count);
 int _unsetenv(char *name, int count);
-int _cd(char *dest_diri, char *shellname, int count, int check);
+int _cd(char *dest_dir,char *shellname, int count, int check);
 void print_err_cd(char *shellname, char *dir_name, int count);
-void print_err_oldpwd(char *current_dir);
+void free_env(char **old_env);
 void input_file_shell(char *argv[]);
 int check_file_exist_argv(char *argv[]);
 int _echo(char **args, int exit_code);
 int _echo_get_var(char **args, int indice);
+void print_err_oldpwd(char *current_dir);
 
 
 #endif /* MAIN_H */

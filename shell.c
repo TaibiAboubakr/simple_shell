@@ -15,34 +15,38 @@ while ((r = getline(&line, &len, stdin)) != -1)
 { exit_code = 0;
 count++;
 args = strtok_alloc(line, r);
-if (args == NULL)
+/* if (args == NULL)
 { _puts_std(2, "Memory allocation failed\n");
 free(line);
-exit(EXIT_FAILURE);}
+exit(EXIT_FAILURE);} */
 if (!args[0])
 { free(args);
 continue; }
 if ((env = check_is_env_cd(args, argv[0], count)))
 { if(env == 2)
 f = 2;
-free(args);
+exit_code = 0;
 continue;}
-if ((_strcmp(args[0], "env")) == 0)
+/* if ((_strcmp(args[0], "env")) == 0)
 { _env();
 free(args);
 exit_code = 0;
-continue; }
+continue; } */
 /*if ((_strcmp(args[0], "exit")) == 0)
 { free(args);
 free(line);
 exit(child_exit_code); }*/
 c_exit = check_if_exit(args, argv[0], count, child_exit_code);
-if (c_exit == -2)
+/* c_exit = (c_exit >= 0) ? c_exit : 2; */
+if (c_exit >= 0 || c_exit == -2)
+{c_exit = (c_exit >= 0) ? c_exit : 2;
+exit(c_exit); }
+/* if (c_exit == -2)
 { free(line);
 exit(2); }
 if (c_exit >= 0)
 {free(line);
-exit(c_exit); }
+exit(c_exit); } */
 cmd1 = check_command_path(args[0]);
 /* if (!cmd1)
 cmd = args[0];
@@ -82,6 +86,8 @@ size_t len = 0;
 ssize_t read = 0, w;
 int count = 0, c_exit = 0, env = 0, f = 0;
 
+if (argc == 2)
+input_file_shell(argv);
 if (!isatty(STDIN_FILENO))
 non_interactive_shell(argv);
 while (1)
@@ -91,9 +97,9 @@ p_err_write();
 count++;
 read = getline(&line, &len, stdin);
 args = strtok_alloc(line, read);
-if (args == NULL)
+/* if (args == NULL)
 { _puts_std(2, "Memory allocation failed\n");
-exit(EXIT_FAILURE); }
+exit(EXIT_FAILURE); } */
 if (!args[0])
 { free(args);
 continue; }
@@ -103,15 +109,16 @@ if (c_exit == -2)
 continue; }
 if (c_exit >= 0)
 break;
+
 if ((env = check_is_env_cd(args, argv[0], count)))
 { if(env == 2)
 f = 2;
-free(args);
+/* free(args); */
 continue;}
-if ((_strcmp(args[0], "env")) == 0)
+/* if ((_strcmp(args[0], "env")) == 0)
 { _env();
 free(args);
-continue; }
+continue; } */
 cmd1 = check_command_path(args[0]);
 /* if (!cmd1)
 cmd = args[0];

@@ -55,38 +55,44 @@ int check_is_env_cd(char **args, char *shellname, int count, int ex_code)
 {
 static int check;
 int ret_cd = 0, i = 0;
-/* (void)ex_code; */
+
 if ((_strcmp(args[0], "setenv")) == 0)
 {
 if (!args[1] || !args[2])
-return (-1);
+{ free(args);
+return (-1); }
 _setenv(args[1], args[2], check);
 check = 1;
-return (2);
-}
-
+free(args);
+return (2); }
 if ((_strcmp(args[0], "unsetenv")) == 0)
 {
 if (!args[1])
-return (-1);
+{ free(args);
+return (-1); }
 _unsetenv(args[1], check);
-return (1);
-}
+free(args);
+return (1); }
+if ((_strcmp(args[0], "env")) == 0)
+{ _env();
+free(args);
+return (1); }
 if ((_strcmp(args[0], "cd")) == 0)
-{
-ret_cd = _cd(args[1], shellname, count, check);
+{ ret_cd = _cd(args[1], shellname, count, check);
 if (ret_cd == -2)
 {check = 1;
+free(args);
 return (2); }
+free(args);
 return (1); }
 if ((_strcmp(args[0], "echo")) == 0 || args[0][0] == '$')
 {_echo(args, ex_code);
+free(args);
 return (1); }
 for (i = 0; args[i]; i++)
 if (args[i][0] == '$')
 _echo_get_var(args, i);
-return (0);
-}
+return (0); }
 
 
 /**

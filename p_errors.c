@@ -24,11 +24,14 @@ exit(0);
 
 /**
  * p_err_write - function that print error when write sys call failed
+ * @w: contain return of write sys call
  */
-void p_err_write(void)
+void p_err_write(int w)
+{
+if (w == -1)
 {
 perror("write");
 exit(EXIT_FAILURE);
-
+}
 }
 

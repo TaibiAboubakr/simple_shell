@@ -38,7 +38,7 @@ char **strtok_alloc(char *line, ssize_t read)
 	line2 = strdup(line);
 	if (line2 == NULL)
 	{   free(line);
-		return (NULL); }
+		exit(EXIT_FAILURE); }
 
 	tok = strtok(line2, " ");
 	tok_cpy = tok;
@@ -48,7 +48,7 @@ char **strtok_alloc(char *line, ssize_t read)
 	if (args == NULL)
 	{   free(line2);
 		free(line);
-		return (NULL);
+		exit(EXIT_FAILURE);
 	}
 	tok_cpy = strtok(line, " ");
 	for (i = 0; tok_cpy; i++)
@@ -58,6 +58,10 @@ char **strtok_alloc(char *line, ssize_t read)
 	}
 	args[i] = NULL;
 	free(line2);
+
+	if (args[0] == NULL)
+	{free(args);
+	return (NULL); }
 	return (args);
 }
 

@@ -14,7 +14,6 @@
 #include <string.h>
 #include <errno.h>
 extern char **environ;
-
 void print_number(int std, int n);
 int _slen(char *s);
 int _puts(char *c);
@@ -25,7 +24,7 @@ int check_file_perm(char *shellname, char *filename, char *err_msg, int count);
 int _puts_len(int std, char *str, int len);
 int exec_cmd(char *cmd, char *args[]);
 int p_err_getline(void);
-void p_err_write(void);
+void p_err_write(int w);
 void non_interactive_shell(char *argv[]);
 char *check_command_path(char *cmd);
 void _free(char *, char *);

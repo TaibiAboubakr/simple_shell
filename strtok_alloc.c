@@ -35,7 +35,7 @@ char **strtok_alloc(char *line, ssize_t read)
 	if (read > 0 && line[read - 1] == '\n')
 		line[read - 1] = '\0';
 
-	line2 = strdup(line);
+	line2 = _strdup(line);
 	if (line2 == NULL)
 	{   free(line);
 		exit(EXIT_FAILURE); }

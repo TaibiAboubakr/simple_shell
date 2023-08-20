@@ -14,13 +14,13 @@ int _echo(char **args, int exit_code)
 
 	for (i = 1; args[i]; i++)
 	{
-		if ((strcmp(args[i], "$$")) == 0)
+		if ((_strcmp(args[i], "$$")) == 0)
 		{
 			pid = (int)getpid();
 			print_number(1, pid);
 			continue;
 		}
-		else if ((strcmp(args[i], "$?")) == 0)
+		else if ((_strcmp(args[i], "$?")) == 0)
 		{
 			print_number(1, exit_code);
 			continue;
@@ -28,7 +28,7 @@ int _echo(char **args, int exit_code)
 		else if (args[i][0] == '$' && args[i][1])
 		{
 			args[i]++;
-			var = getenv(args[i]);
+			var = _getenv(args[i]);
 			if (var)
 				_puts(var);
 			continue;
@@ -55,7 +55,7 @@ int _echo_get_var(char **args, int indice)
 {   char *var;
 
 	args[indice]++;
-	var = getenv(args[indice]);
+	var = _getenv(args[indice]);
 	if (var)
 	{args[indice] = var;
 		return (0); }

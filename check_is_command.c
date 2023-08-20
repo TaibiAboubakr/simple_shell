@@ -114,7 +114,7 @@ dest_dir = _getenv("HOME");
 if (!dest_dir)
 return (-1);
 current_dir = getcwd(NULL, 100);
-if (strcmp(dest_dir, "-") == 0)
+if (_strcmp(dest_dir, "-") == 0)
 {old = 1;
 dest_dir = _getenv("OLDPWD");
 if (!dest_dir)

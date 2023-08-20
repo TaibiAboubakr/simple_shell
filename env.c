@@ -56,8 +56,8 @@ void free_env(char **old_env)
 int _setenv(char *name, const char *value, int count)
 {
 	char *var = NULL, **new_env = NULL, **old_env = environ;
-	int count_var = 0, i = 0, lname = strlen(name);
-	int len_var = lname + strlen(value) + 2;
+	int count_var = 0, i = 0, lname = _slen(name);
+	int len_var = lname + _slen((char*)(value)) + 2;
 
 	var = _getenv(name);
 	while (environ[count_var])
@@ -65,30 +65,30 @@ int _setenv(char *name, const char *value, int count)
 	if (var)
 	{ new_env = (char **) malloc(sizeof(char *) * (count_var + 1));
 		for (i = 0; environ[i]; i++)
-			new_env[i] = strdup(environ[i]);
+			new_env[i] = _strdup(environ[i]);
 		new_env[i] = NULL;
 		environ = new_env;
 		for (i = 0; new_env[i]; i++)
 		{
-			if (strncmp(new_env[i], name, lname) == 0 && new_env[i][lname] == '=')
+			if (_strncmp(new_env[i], name, lname) == 0 && new_env[i][lname] == '=')
 			{   free(new_env[i]);
 				new_env[i] = (char *)malloc(sizeof(char) * len_var);
-				strcpy(new_env[i], name);
-				strcat(new_env[i], "=");
-				strcat(new_env[i], value);
-				strcat(new_env[i], "\0");
+				_strcpy(new_env[i], name);
+				_strcat(new_env[i], "=");
+				_strcat(new_env[i], (char *)value);
+				_strcat(new_env[i], "\0");
 				break; }
 		}
 	}
 	if (!var)
 	{ new_env = (char **) malloc(sizeof(char *) * (count_var + 2));
 		for (i = 0; environ[i]; i++)
-			new_env[i] = strdup(environ[i]);
+			new_env[i] = _strdup(environ[i]);
 		new_env[i] = (char *)malloc(sizeof(char) * len_var);
-		strcpy(new_env[i], name);
-		strcat(new_env[i], "=");
-		strcat(new_env[i], value);
-		strcat(new_env[i], "\0");
+		_strcpy(new_env[i], name);
+		_strcat(new_env[i], "=");
+		_strcat(new_env[i], (char *)value);
+		_strcat(new_env[i], "\0");
 		new_env[i + 1] = NULL;
 		environ = new_env; }
 	if (count > 0)
@@ -105,7 +105,7 @@ int _setenv(char *name, const char *value, int count)
 int _unsetenv(char *name, int count)
 {
 	char *var, *del_var;
-	int i = 0, lname = strlen(name);
+	int i = 0, lname = _slen(name);
 
 	var = _getenv(name);
 
@@ -113,7 +113,7 @@ int _unsetenv(char *name, int count)
 	{
 		for (i = 0; environ[i]; i++)
 		{
-			if (strncmp(environ[i], name, lname) == 0 && environ[i][lname] == '=')
+			if (_strncmp(environ[i], name, lname) == 0 && environ[i][lname] == '=')
 			{ del_var = environ[i];
 				break; }
 		}

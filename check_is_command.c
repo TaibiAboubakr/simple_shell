@@ -55,7 +55,6 @@ int check_is_env_cd(char **args, char *shellname, int count, int ex_code)
 {
 static int check;
 int ret_cd = 0, i = 0;
-
 if ((_strcmp(args[0], "setenv")) == 0)
 {
 if (!args[1] || !args[2])
@@ -85,6 +84,8 @@ free(args);
 return (2); }
 free(args);
 return (1); }
+if (check_is_comment(args))
+return (1);
 if ((_strcmp(args[0], "echo")) == 0 || args[0][0] == '$')
 {_echo(args, ex_code);
 free(args);

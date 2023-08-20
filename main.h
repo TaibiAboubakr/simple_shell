@@ -54,6 +54,8 @@ int check_file_exist_argv(char *argv[]);/*file_input_shell.c*/
 int _echo(char **args, int exit_code);/*echo_variables.c*/
 int _echo_get_var(char **args, int indice);/*echo_variables.c*/
 void print_err_oldpwd(char *current_dir);
+ssize_t _getline(char **line, size_t *size, FILE *stream);
+int check_is_comment(char **args);/*check_is_comment.c*/
 /*check_is_env - exit_func.c*/
 
 #endif /* MAIN_H */

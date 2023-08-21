@@ -11,7 +11,7 @@ void input_file_shell(char *argv[])
 {
 char **args, *cmd, *cmd1, buffer[1024] = {'\0'}, buffer1[1024] = {'\0'};
 ssize_t r = 0;
-int fd, f = 0, i, j = 0, ex_cod = 0, c_e_c = 0, env = 0, count = 0, c_exit = 0;
+int fd, i, j = 0, ex_cod = 0, c_e_c = 0, count = 0, c_exit = 0;
 check_file_exist_argv(argv);
 fd = open(argv[1], O_RDONLY);
 if (fd == -1)
@@ -67,10 +67,11 @@ if ((stat(argv[1], &f_stat) == 0))
 return (1);
 len = _slen(argv[0]);
 _puts_len(2, argv[0], len);
-write(2, ": 0: cannot open ", 17);
+write(2, ": 0: Can't open ", 16);
 _puts_len(2, argv[1], _slen(argv[1]));
-write(2, ": No such file", 14);
+/*write(2, ": No such file", 14);*/
 write(2, "\n", 1);
-exit(2);
+exit(127);
 }
+
 

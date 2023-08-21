@@ -57,7 +57,7 @@ int _setenv(char *name, const char *value, int count)
 {
 	char *var = NULL, **new_env = NULL, **old_env = environ;
 	int count_var = 0, i = 0, lname = _slen(name);
-	int len_var = lname + _slen((char*)(value)) + 2;
+	int len_var = lname + _slen((char *)(value)) + 2;
 
 	var = _getenv(name);
 	while (environ[count_var])

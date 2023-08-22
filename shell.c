@@ -6,24 +6,28 @@
  */
 void non_interactive_shell(char *argv[])
 {
-char *line = NULL, **args, *cmd, *cmd1;
+char *line = NULL, **args, **args_c = NULL, *cmd, *cmd1;
 size_t len = 0;
 ssize_t r = 0;
-int exit_code = 0, count = 0, child_exit_code = 0, c_exit = 0, env = 0, f = 0;
-while ((r = getline(&line, &len, stdin)) != -1)
-{ exit_code = 0;
-count++;
-args = strtok_alloc(line, r);
+int exit_code = 0, count = 0, ch_ex_c = 0, c_exit = 0, env = 0, f = 0, i = 0;
+while ((r = __getline(&line, &len, stdin)) != -1)
+{ args_c = strtok_alloc_semi_colom(line, r);
+if (args_c == NULL)
+continue;
+exit_code = 0;
+for (i = 0; args_c[i]; i++)
+{ count++;
+args = strtok_alloc(args_c[i], 1);
 if (args == NULL)
 continue;
-env = check_is_env_cd(args, argv[0], count, child_exit_code);
+env = check_is_env_cd(args, argv[0], count, ch_ex_c);
 if (env)
 {
 if (env == 2)
 f = 2;
-exit_code = 0;
+ch_ex_c = 0;
 continue; }
-c_exit = check_if_exit(args, argv[0], count, child_exit_code);
+c_exit = check_if_exit(args, argv[0], count, ch_ex_c, args_c);
 if (c_exit == -2)
 { free(line);
 exit(2); }
@@ -32,16 +36,17 @@ if (c_exit >= 0)
 exit(c_exit); }
 cmd1 = check_command_path(args[0]);
 cmd = !cmd1 ? args[0] : cmd1;
-exit_code = check_file(argv[0], cmd, args, count);
-if (exit_code)
+ch_ex_c = check_file(argv[0], cmd, args, count);
+if (ch_ex_c)
 continue;
-child_exit_code = exec_cmd(cmd, args);
+ch_ex_c = exec_cmd(cmd, args);
 _free(NULL, cmd1);
-free(args); }
+free(args); } /*for*/
+free(args_c); } /*while*/
 free(line);
 if (f == 2)
 free_env(environ);
-exit(exit_code); }
+exit(ch_ex_c); }
 
 
 /**
@@ -53,7 +58,7 @@ exit(exit_code); }
 
 int main(int argc __attribute__((unused)), char *argv[])
 {
-char *line = NULL, **args, *cmd, *cmd1 = NULL;
+char *line = NULL, **args, *cmd, *cmd1 = NULL, **args_c = NULL;
 size_t len = 0;
 ssize_t read = 0, w;
 int count = 0, c_exit = 0, env = 0, f = 0;
@@ -65,11 +70,11 @@ while (1)
 { w = write(1, "($) ", 4);
 p_err_write(w);
 count++;
-read = getline(&line, &len, stdin);
+read = __getline(&line, &len, stdin);
 args = strtok_alloc(line, read);
 if (args == NULL)
 continue;
-c_exit = check_if_exit(args, argv[0], count, 0);
+c_exit = check_if_exit(args, argv[0], count, 0, args_c);
 if (c_exit == -2)
 { c_exit = 2;
 continue; }

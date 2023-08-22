@@ -1,6 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
-
+#define __getline getline
 #define _GNU_SOURCE
 #include <sys/types.h>
 #include <stddef.h>
@@ -48,7 +48,7 @@ int check_is_env_cd(char **args, char *shellname, int count, int ex_code);
 int _cd(char *dest_dir, char *shellname, int count, int check);
 void print_err_cd(char *shellname, char *dir_name, int count);
 void print_err_oldpwd(char *current_dir);
-int check_if_exit(char **args, char *shellname, int count, int exit_code);
+int check_if_exit(char **args, char *shname, int count, int ex_code, char **a);
 /** check_is_env - exit_func.c **/
 
 
@@ -58,6 +58,7 @@ void p_err_write(int w);
 
 /** strtok_alloc.c **/
 char **strtok_alloc(char *line, ssize_t read);
+char **strtok_alloc_semi_colom(char *line, ssize_t read);
 int _puts_std(int std, char *c);
 
 

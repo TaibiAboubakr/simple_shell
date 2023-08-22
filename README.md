@@ -1,14 +1,14 @@
-#  * Simple Shell *
+#  *Simple Shell*
 
 This is a basic UNIX command interpreter project implemented in C as part of the ALX Software Engineering program.
 The project focuses on building a simple shell that allows users to execute various commands and explore basic shell
 functionalities
 
-## Introduction
+## *Introduction*
 
 The Simple Shell project is a collaborative effort aimed at providing an understanding of how a shell works, along with C programming concepts
 
-## Getting Started
+## *Getting Started*
 
 To use the Simple Shell, follow these steps:
 
@@ -18,7 +18,7 @@ To use the Simple Shell, follow these steps:
 4. Input commands at the prompt and observe the output
 
 
-## * Built-in Commands *
+## *Built-in Commands*
 
     exit: Used to exit the shell. Usage: exit [status]
     env: Prints current environment variables. Usage: env
@@ -27,19 +27,19 @@ To use the Simple Shell, follow these steps:
     $?: Expands to the exit status of the last command
     Comments (#): Text after '#' is ignored as a comment
 
-## * Supported System Calls : *
+## *Supported System Calls :*
 
- * File Manipulation: * access, close, execve, open, read, write
- * Process Control: * fork, exit, _exit, getpid, isatty, kill, wait, waitpid, wait3, wait4
- * Directory Manipulation: * chdir, closedir, opendir, readdir
- * Memory Allocation: * free, malloc
- * Input/Output: * getline
- * String Manipulation: * strtok
- * Error Reporting: * perror
- * Signal Handling: * signal
- * File Information: * stat, lstat, fstat 
+ * *File Manipulation:* access, close, execve, open, read, write
+ * *Process Control:* fork, exit, _exit, getpid, isatty, kill, wait, waitpid, wait3, wait4
+ * *Directory Manipulation:* chdir, closedir, opendir, readdir
+ * *Memory Allocation:* free, malloc
+ * *Input/Output:* getline
+ * *String Manipulation:* strtok
+ * *Error Reporting:* perror
+ * *Signal Handling:* signal
+ * *File Information:* stat, lstat, fstat 
 
-#####  * Contributors *
+## *Contributors*
 
     Imane Zenasni
     Aboubakr Taibi

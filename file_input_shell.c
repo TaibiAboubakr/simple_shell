@@ -11,7 +11,7 @@ void input_file_shell(char *argv[])
 {
 char **args, *cmd, *cmd1, buffer[1024] = {'\0'}, buffer1[1024] = {'\0'};
 ssize_t r = 0;
-int fd, f = 0, i, j = 0, ex_cod = 0, c_e_c = 0, env = 0, count = 0, c_exit = 0;
+int fd, i, j = 0, ex_cod = 0, c_e_c = 0, count = 0, c_exit = 0;
 check_file_exist_argv(argv);
 fd = open(argv[1], O_RDONLY);
 if (fd == -1)

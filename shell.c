@@ -9,12 +9,11 @@ void non_interactive_shell(char *argv[])
 char *line = NULL, **args, **args_c = NULL, *cmd, *cmd1;
 size_t len = 0;
 ssize_t r = 0;
-int exit_code = 0, count = 0, ch_ex_c = 0, c_exit = 0, env = 0, f = 0, i = 0;
+int count = 0, ch_ex_c = 0, c_exit = 0, env = 0, f = 0, i = 0;
 while ((r = __getline(&line, &len, stdin)) != -1)
 { args_c = strtok_alloc_semi_colom(line, r);
 if (args_c == NULL)
 continue;
-exit_code = 0;
 for (i = 0; args_c[i]; i++)
 { count++;
 args = strtok_alloc(args_c[i], 1);

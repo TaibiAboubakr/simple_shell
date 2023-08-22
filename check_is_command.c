@@ -114,7 +114,7 @@ return (0); }
 int _cd(char *dest_dir, char *shellname, int count, int check)
 {
 char *current_dir;
-int i = 0, old = 0;
+int old = 0;
 struct stat dirStat;
 
 if (!dest_dir)

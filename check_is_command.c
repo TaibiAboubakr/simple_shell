@@ -2,17 +2,18 @@
 
 /**
  * check_if_exit - Checks for the "exit" command and handles its argument
- * @args: An array of strings containing command-line arguments
+ * @args: An array of pointers to strings containing command-line & arguments
  * @shellname: The name of the shell program
  * @count: The current command count
- * @child_exit_code: The exit status of a child process
+ * @cec: The exit status of a child process
+ * @a:An array of pointers to strings containing all commands-line & arguments
  * Return:  0, if no additional argument is provided
  * -2, displaying an error message if a non-valid integer argument is provided
  * The integer exit status, if a valid integer argument is provided
  * 0,if the given command is not "exit"
  */
 
-int check_if_exit(char **args, char *shellname, int count, int child_exit_code)
+int check_if_exit(char **args, char *shellname, int count, int cec, char **a)
 {
 	int r_atoi = 0;
 
@@ -20,7 +21,9 @@ int check_if_exit(char **args, char *shellname, int count, int child_exit_code)
 	{
 		if (!args[1])
 		{ free(args);
-		return (child_exit_code); }
+		if (a)
+		free(a);
+		return (cec); }
 		r_atoi = _atoi(args[1]);
 		if (r_atoi == -1)
 		{
@@ -35,9 +38,13 @@ int check_if_exit(char **args, char *shellname, int count, int child_exit_code)
 			_puts_len(2, args[1], _slen(args[1]));
 			write(2, "\n", 1);
 			free(args);
+			if (a)
+			free(a);
 			return (-2);
 		}
 		free(args);
+		if (a)
+		free(a);
 		return (r_atoi);
 	}
 	return (-1);
@@ -107,7 +114,7 @@ return (0); }
 int _cd(char *dest_dir, char *shellname, int count, int check)
 {
 char *current_dir;
-int old = 0;
+int i = 0, old = 0;
 struct stat dirStat;
 
 if (!dest_dir)
@@ -179,5 +186,3 @@ _puts_std(1, current_dir);
 __putchar('\n');
 free(current_dir);
 }
-
-
